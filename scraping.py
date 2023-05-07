@@ -47,19 +47,22 @@ def menu1():
             if script.attrs.get("src"):
                 url_script = urljoin(url, script.attrs.get("src"))
                 archivos_de_script.append(url_script)
-        archivos_de_css = []
+                archivos_de_css = []
         for css in sopa.find_all("link"):
             if css.attrs.get("href"):
-                    url_css = urljoin(url, css.attrs.get("href"))
-                    archivos_de_css.append(url_css)
-                    print("Total de archivos de script en la página:", len(archivos_de_script))
-                    print("Total de archivos CSS en la página:", len(archivos_de_css))
-                    with open("javascript.txt", "w") as f:
-                        for archivo_js in archivos_de_script:
-                            print(archivo_js, file=f)
-                            with open("css.txt", "w") as f:
-                                for archivo_css in archivos_de_css:
-                                    print(archivo_css, file=f)
+                url_css = urljoin(url, css.attrs.get("href"))
+                archivos_de_css.append(url_css)
+                
+        # Abrir y escribir archivos
+        with open("javascript.txt", "w") as f:
+            for archivo_js in archivos_de_script:
+                print(archivo_js, file=f)
+        with open("css.txt", "w") as f:
+            for archivo_css in archivos_de_css:
+                print(archivo_css, file=f)
+                
+        print("Total de archivos de script en la página:", len(archivos_de_script))
+        print("Total de archivos CSS en la página:", len(archivos_de_css))
 
 
 def menu2():
